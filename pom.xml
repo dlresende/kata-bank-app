@@ -88,12 +88,17 @@
     </dependencyManagement>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>org.glassfish.jersey.containers</groupId>-->
+            <!--<artifactId>jersey-container-servlet-core</artifactId>-->
+            <!--&lt;!&ndash; use the following artifactId if you don't need servlet 2.x compatibility &ndash;&gt;-->
+            <!--&lt;!&ndash; artifactId>jersey-container-servlet</artifactId &ndash;&gt;-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet-core</artifactId>
-            <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
-            <!-- artifactId>jersey-container-servlet</artifactId -->
+            <artifactId>jersey-container-grizzly2-http</artifactId>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
