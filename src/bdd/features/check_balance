@@ -1,0 +1,20 @@
+Feature : Create account
+As a new customer 
+I want to create my account
+In order to become client of the bank
+
+Scenario:
+Given a new user "coucou@gmail.com"
+When "coucou@gmail.com" creates an account
+Then account is created with a balance 0.
+
+Feature: Check balance
+As a new customer
+I want to check my balance
+In order to manager my account
+
+Scenario: 
+Given a new user "maria.frih"
+When "maria.frih" accesses her account for the first time
+Then the balance is 0 euros
+
