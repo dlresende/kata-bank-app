@@ -4,6 +4,6 @@ Feature: Check balance
   In order to manager my account
 
   Scenario:
-    Given a user "mfrih@email.com" with an empty account
-    When "mfrih@email.com" deposit 10 euros into her account
-    Then the new balance is 10 euros
+    Given a user "mfrih@email.com" with no money in her account
+    When 10 EUR is deposited into her account
+    Then the new balance should be 10 EUR
