@@ -1,5 +1,7 @@
 package net.diegolemos.bankapp.client;
 
+import net.diegolemos.bankapp.account.AccountRepository;
+
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -12,17 +14,20 @@ import static javax.ws.rs.core.Response.ok;
 @Produces("application/json;charset=utf-8")
 public class ClientResource {
 
-    private final Clients clients;
+    private final AccountRepository accounts;
+    private final ClientRepository clients;
 
     @Inject
-    public ClientResource(Clients clients) {
+    public ClientResource(AccountRepository accounts, ClientRepository clients) {
+        this.accounts = accounts;
         this.clients = clients;
     }
 
     @PUT
     @Path("{username}")
     public Response save(@PathParam("username") String username, Client client) {
-        clients.put(username, client);
+        clients.add(username, client);
+        accounts.createFor(username);
         return noContent().build();
     }
 

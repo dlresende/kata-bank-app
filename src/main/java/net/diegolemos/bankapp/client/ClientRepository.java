@@ -3,11 +3,11 @@ package net.diegolemos.bankapp.client;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Clients {
+public class ClientRepository {
 
     private final Map<String, Client> allClients = new HashMap<>();
 
-    public void put(String username, Client client) {
+    public void add(String username, Client client) {
         allClients.put(username, client);
     }
 

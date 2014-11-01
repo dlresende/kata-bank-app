@@ -1,6 +1,7 @@
-package net.diegolemos;
+package net.diegolemos.bankapp;
 
-import net.diegolemos.bankapp.client.Clients;
+import net.diegolemos.bankapp.account.AccountRepository;
+import net.diegolemos.bankapp.client.ClientRepository;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -16,27 +17,34 @@ public class Main {
     public static final String BANK_APP = "http://localhost:8080/bankapp/";
 
     public static HttpServer startServer() {
+        return startServer(new BankAppBinder());
+    }
+
+    public static HttpServer startServer(AbstractBinder binder) {
         ResourceConfig config = new ResourceConfig();
-        config.packages("net.diegolemos");
-        config.register(new BankAppBinder());
+        config.packages("net.diegolemos.bankapp");
+        config.register(binder);
         return createHttpServer(URI.create(BANK_APP), config);
     }
 
-    static class ClientsFactory implements Factory<Clients> {
-        @Override
-        public Clients provide() {
-            return new Clients();
-        }
+    private static <T> Factory<T> factory(T t) {
+        return new Factory<T>() {
+            @Override
+            public T provide() {
+                return t;
+            }
 
-        @Override
-        public void dispose(Clients clients) {
-        }
+            @Override
+            public void dispose(T instance) {
+            }
+        };
     }
 
-    private static class BankAppBinder extends AbstractBinder {
+    public static class BankAppBinder extends AbstractBinder {
         @Override
         protected void configure() {
-            bindFactory(ClientsFactory.class).to(Clients.class).in(Singleton.class);
+            bindFactory(factory(new ClientRepository())).to(ClientRepository.class).in(Singleton.class);
+            bindFactory(factory(new AccountRepository())).to(AccountRepository.class).in(Singleton.class);
         }
     }
 
