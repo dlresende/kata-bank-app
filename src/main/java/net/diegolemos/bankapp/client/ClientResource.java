@@ -4,7 +4,10 @@ import net.diegolemos.bankapp.account.AccountRepository;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+
+import java.util.Collection;
 
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
@@ -32,5 +35,12 @@ public class ClientResource {
     @Path("{username}")
     public Response getByUsername(@PathParam("username") String username) {
         return ok(clients.withUsername(username)).build();
+    }
+
+    @GET
+    public Response getAll() {
+        Collection<Client> allClients = clients.all();
+        GenericEntity<Collection<Client>> response = new GenericEntity<Collection<Client>>(allClients) {};
+        return ok(response).build();
     }
 }

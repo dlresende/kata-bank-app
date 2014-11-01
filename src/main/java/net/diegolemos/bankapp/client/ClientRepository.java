@@ -1,5 +1,6 @@
 package net.diegolemos.bankapp.client;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,5 +14,9 @@ public class ClientRepository {
 
     public Client withUsername(String username) {
         return allClients.get(username);
+    }
+
+    public Collection<Client> all() {
+        return allClients.values();
     }
 }
