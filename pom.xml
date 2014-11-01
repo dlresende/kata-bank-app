@@ -93,12 +93,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.containers</groupId>-->
-            <!--<artifactId>jersey-container-servlet-core</artifactId>-->
-            <!--&lt;!&ndash; use the following artifactId if you don't need servlet 2.x compatibility &ndash;&gt;-->
-            <!--&lt;!&ndash; artifactId>jersey-container-servlet</artifactId &ndash;&gt;-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-http</artifactId>
@@ -110,23 +104,44 @@
             <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-        <!-- uncomment this to get JSON support
+
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
         </dependency>
-        -->
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.13</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.7</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

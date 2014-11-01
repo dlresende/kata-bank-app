@@ -1,43 +1,49 @@
 package net.diegolemos;
 
+import net.diegolemos.bankapp.client.Clients;
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.hk2.api.Factory;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URI;
 
-/**
- * Main class.
- *
- */
+import static org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory.createHttpServer;
+
 public class Main {
-    // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/myapp/";
+    public static final String BANK_APP = "http://localhost:8080/bankapp/";
 
-    /**
-     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
-     * @return Grizzly HTTP server.
-     */
     public static HttpServer startServer() {
-        // create a resource config that scans for JAX-RS resources and providers
-        // in com.example package
-        final ResourceConfig rc = new ResourceConfig().packages("net.diegolemos");
-
-        // create and start a new instance of grizzly http server
-        // exposing the Jersey application at BASE_URI
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+        ResourceConfig config = new ResourceConfig();
+        config.packages("net.diegolemos");
+        config.register(new BankAppBinder());
+        return createHttpServer(URI.create(BANK_APP), config);
     }
 
-    /**
-     * Main method.
-     * @param args
-     * @throws IOException
-     */
+    static class ClientsFactory implements Factory<Clients> {
+        @Override
+        public Clients provide() {
+            return new Clients();
+        }
+
+        @Override
+        public void dispose(Clients clients) {
+        }
+    }
+
+    private static class BankAppBinder extends AbstractBinder {
+        @Override
+        protected void configure() {
+            bindFactory(ClientsFactory.class).to(Clients.class).in(Singleton.class);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+                + "%sapplication.wadl\nHit enter to stop it...", BANK_APP));
         System.in.read();
         server.stop();
     }

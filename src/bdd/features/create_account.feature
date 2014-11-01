@@ -4,6 +4,6 @@ Feature:
   In order to become client of the bank
 
   Scenario:
-    Given a new user "dlemos@email.com"
-    When an account is created for "dlemos@email.com"
-    Then the new account has balance 0 EUR
+    Given a new user "dlemos@mail.com"
+    When the user becomes client
+    Then balance of his new account is 0 EUR
