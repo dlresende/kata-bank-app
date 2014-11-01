@@ -18,6 +18,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
-        <url-pattern>/webapi/*</url-pattern>
+        <url-pattern>/bankapp/*</url-pattern>
     </servlet-mapping>
 </web-app>
