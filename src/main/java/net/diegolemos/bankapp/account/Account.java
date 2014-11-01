@@ -1,6 +1,9 @@
 package net.diegolemos.bankapp.account;
 
+import net.diegolemos.bankapp.client.Client;
+
 public class Account {
+    private Client holder;
     private double balance;
 
     public double getBalance() {
@@ -11,6 +14,14 @@ public class Account {
         this.balance = balance;
     }
 
+    public Client getHolder() {
+        return holder;
+    }
+
+    public void setHolder(Client holder) {
+        this.holder = holder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -18,19 +29,25 @@ public class Account {
 
         Account account = (Account) o;
 
-        return Double.compare(account.balance, balance) == 0;
+        return Double.compare(account.balance, balance) == 0
+                && !(holder != null ? !holder.equals(account.holder) : account.holder != null);
     }
 
     @Override
     public int hashCode() {
-        long temp = Double.doubleToLongBits(balance);
-        return (int) (temp ^ (temp >>> 32));
+        int result;
+        long temp;
+        result = holder != null ? holder.hashCode() : 0;
+        temp = Double.doubleToLongBits(balance);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "balance=" + balance +
+                "holder=" + holder +
+                ", balance=" + balance +
                 '}';
     }
 }

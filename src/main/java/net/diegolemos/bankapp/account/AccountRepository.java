@@ -14,6 +14,8 @@ public class AccountRepository {
     }
 
     public void createFor(Client client) {
-        allAccounts.put(client, new Account());
+        Account account = new Account();
+        account.setHolder(client);
+        allAccounts.put(client, account);
     }
 }
