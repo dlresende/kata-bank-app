@@ -1,17 +1,19 @@
 package net.diegolemos.bankapp.account;
 
+import net.diegolemos.bankapp.client.Client;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class AccountRepository {
 
-    private final Map<String, Account> allAccounts = new HashMap<>();
+    private final Map<Client, Account> allAccounts = new HashMap<>();
 
-    public Account findForClient(String username) {
-        return allAccounts.get(username);
+    public Account forHolder(Client client) {
+        return allAccounts.get(client);
     }
 
-    public void createFor(String username) {
-        allAccounts.put(username, new Account());
+    public void createFor(Client client) {
+        allAccounts.put(client, new Account());
     }
 }

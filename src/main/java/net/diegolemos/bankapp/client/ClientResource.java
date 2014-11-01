@@ -27,13 +27,13 @@ public class ClientResource {
     @Path("{username}")
     public Response save(@PathParam("username") String username, Client client) {
         clients.add(username, client);
-        accounts.createFor(username);
+        accounts.createFor(client);
         return noContent().build();
     }
 
     @GET
     @Path("{username}")
     public Response getByUsername(@PathParam("username") String username) {
-        return ok(clients.get(username)).build();
+        return ok(clients.withUsername(username)).build();
     }
 }

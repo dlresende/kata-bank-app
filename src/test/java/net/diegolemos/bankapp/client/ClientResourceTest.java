@@ -30,7 +30,7 @@ public class ClientResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_get_client_by_username() {
-        given(clients.get("bob")).willReturn(BOB);
+        given(clients.withUsername("bob")).willReturn(BOB);
 
         Client client = clientResource.path("bob").request().get(Client.class);
 
@@ -41,6 +41,6 @@ public class ClientResourceTest extends AbstractHttpTest {
     should_create_an_account_with_balance_0_for_new_users() {
         clientResource.path("bob").request().put(json(BOB));
 
-        verify(accounts).createFor("bob");
+        verify(accounts).createFor(BOB);
     }
 }

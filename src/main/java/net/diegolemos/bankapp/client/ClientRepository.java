@@ -11,7 +11,7 @@ public class ClientRepository {
         allClients.put(username, client);
     }
 
-    public Client get(String username) {
+    public Client withUsername(String username) {
         return allClients.get(username);
     }
 }

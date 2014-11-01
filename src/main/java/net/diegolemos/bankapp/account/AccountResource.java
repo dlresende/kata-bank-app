@@ -1,5 +1,8 @@
 package net.diegolemos.bankapp.account;
 
+import net.diegolemos.bankapp.client.Client;
+import net.diegolemos.bankapp.client.ClientRepository;
+
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -12,16 +15,19 @@ import static javax.ws.rs.core.Response.ok;
 public class AccountResource {
 
     private final AccountRepository accounts;
+    private final ClientRepository clients;
 
     @Inject
-    public AccountResource(AccountRepository accounts) {
+    public AccountResource(AccountRepository accounts, ClientRepository clients) {
         this.accounts = accounts;
+        this.clients = clients;
     }
 
     @GET
     @Path("{username}")
     public Response getByUsername(@PathParam("username") String username) {
-        Account account = accounts.findForClient(username);
+        Client client = clients.withUsername(username);
+        Account account = accounts.forHolder(client);
         return ok(account).build();
     }
 }
