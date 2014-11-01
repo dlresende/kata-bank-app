@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static javax.ws.rs.client.ClientBuilder.newClient;
-import static net.diegolemos.bankapp.Main.*;
+import static net.diegolemos.bankapp.Server.*;
 import static org.mockito.Mockito.mock;
 
 public abstract class AbstractHttpTest {

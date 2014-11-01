@@ -1,12 +1,9 @@
 package net.diegolemos.bankapp.client;
 
-import net.diegolemos.bankapp.account.AccountRepository;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
-
 import java.util.Collection;
 
 import static javax.ws.rs.core.Response.noContent;
@@ -40,7 +37,10 @@ public class ClientResource {
     @GET
     public Response getAll() {
         Collection<Client> allClients = clients.all();
-        GenericEntity<Collection<Client>> response = new GenericEntity<Collection<Client>>(allClients) {};
-        return ok(response).build();
+        return ok(serializeCollection(allClients)).build();
+    }
+
+    private GenericEntity<Collection<Client>> serializeCollection(final Collection<Client> collection) {
+        return new GenericEntity<Collection<Client>>(collection) {};
     }
 }

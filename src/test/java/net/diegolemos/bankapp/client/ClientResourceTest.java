@@ -1,14 +1,10 @@
 package net.diegolemos.bankapp.client;
 
 import net.diegolemos.bankapp.AbstractHttpTest;
-import net.diegolemos.bankapp.account.AccountRepository;
 import org.junit.Test;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import static java.util.Arrays.asList;
@@ -46,10 +42,7 @@ public class ClientResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_list_all_clients() {
-        Collection<Client> result = new ArrayList<>();
-        result.add(ALICE);
-        result.add(BOB);
-        given(clients.all()).willReturn(result);
+        given(clients.all()).willReturn(asList(ALICE, BOB));
 
         Collection<Client> clients = clientResource.request().get(new GenericType<Collection<Client>>() {});
 

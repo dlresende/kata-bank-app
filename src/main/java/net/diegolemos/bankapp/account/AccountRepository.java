@@ -2,6 +2,7 @@ package net.diegolemos.bankapp.account;
 
 import net.diegolemos.bankapp.client.Client;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,5 +18,9 @@ public class AccountRepository {
         Account account = new Account();
         account.setHolder(client);
         allAccounts.put(client, account);
+    }
+
+    public Collection<Account> all() {
+        return allAccounts.values();
     }
 }
