@@ -14,12 +14,10 @@ import static javax.ws.rs.core.Response.ok;
 @Produces("application/json;charset=utf-8")
 public class ClientResource {
 
-    private final AccountRepository accounts;
     private final ClientRepository clients;
 
     @Inject
-    public ClientResource(AccountRepository accounts, ClientRepository clients) {
-        this.accounts = accounts;
+    public ClientResource(ClientRepository clients) {
         this.clients = clients;
     }
 
@@ -27,7 +25,6 @@ public class ClientResource {
     @Path("{username}")
     public Response save(@PathParam("username") String username, Client client) {
         clients.add(username, client);
-        accounts.createFor(client);
         return noContent().build();
     }
 

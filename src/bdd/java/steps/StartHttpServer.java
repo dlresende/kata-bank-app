@@ -6,7 +6,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 
 import static net.diegolemos.bankapp.Main.startServer;
 
-public class EmbeddedHttpServer {
+public class StartHttpServer {
 
     private HttpServer server;
 

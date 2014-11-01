@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 
 @Path("account")
@@ -29,5 +30,11 @@ public class AccountResource {
         Client client = clients.withUsername(username);
         Account account = accounts.forHolder(client);
         return ok(account).build();
+    }
+
+    @PUT
+    public Response createAccount(Client client) {
+        accounts.createFor(client);
+        return noContent().build();
     }
 }

@@ -17,7 +17,6 @@ public class ClientResourceTest extends AbstractHttpTest {
 
     private static final Client BOB = aClient().withUsername("bob").build();
 
-    private AccountRepository accounts = injectMock(AccountRepository.class);
     private ClientRepository clients = injectMock(ClientRepository.class);
     private WebTarget clientResource = resource("client");
 
@@ -35,12 +34,5 @@ public class ClientResourceTest extends AbstractHttpTest {
         Client client = clientResource.path("bob").request().get(Client.class);
 
         assertThat(client, equalTo(BOB));
-    }
-
-    @Test public void
-    should_create_an_account_with_balance_0_for_new_users() {
-        clientResource.path("bob").request().put(json(BOB));
-
-        verify(accounts).createFor(BOB);
     }
 }
