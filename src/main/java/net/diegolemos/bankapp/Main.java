@@ -14,7 +14,7 @@ import java.net.URI;
 import static org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory.createHttpServer;
 
 public class Main {
-    public static final String BANK_APP = "http://localhost:8080/bankapp/";
+    public static final String BANK_APP = "http://localhost:8000/bankapp/";
 
     public static HttpServer startServer() {
         return startServer(new BankAppBinder());
