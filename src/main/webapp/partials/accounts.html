@@ -1,0 +1,42 @@
+<div class="col-md-6">
+    <form class="form-horizontal" role="form" ng-submit="getAccountBy(username)">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="input-username" class="pull-right control-label">Username</label>
+            </div>
+
+            <div class="col-md-10">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="input-username" ng-model="username">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="panel panel-default" ng-show="account">
+        <div class="panel-heading">{{account.holder.username}}</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>Deposit</th>
+                <th>Withdraw</th>
+                <th>Balance</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{account.balance}} EUR</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

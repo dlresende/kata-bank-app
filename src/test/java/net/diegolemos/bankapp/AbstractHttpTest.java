@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static javax.ws.rs.client.ClientBuilder.newClient;
+import static net.diegolemos.bankapp.BankAppBinder.factory;
 import static net.diegolemos.bankapp.Server.*;
 import static org.mockito.Mockito.mock;
 
@@ -37,19 +38,6 @@ public abstract class AbstractHttpTest {
     public void tearDown() throws Exception {
         server.stop();
         binders = new LinkedList<>();
-    }
-
-    private static <T> Factory<T> factory(T t) {
-        return new Factory<T>() {
-            @Override
-            public T provide() {
-                return t;
-            }
-
-            @Override
-            public void dispose(T instance) {
-            }
-        };
     }
 
     private class BankAppBinderTest extends AbstractBinder {
