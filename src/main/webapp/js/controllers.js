@@ -25,15 +25,14 @@ angular.module('bankApp')
         };
     })
     .controller('AccountsCtrl', function($scope, $http, $routeParams) {
-
-        if($routeParams.username) {
-            $scope.getAccountBy($routeParams.username);
-        }
-
         $scope.getAccountBy = function(username) {
             $http.get('/api/account/' + username)
                 .success(function(account) {
                     $scope.account = account;
                 });
         };
+
+        if($routeParams.username) {
+            $scope.getAccountBy($routeParams.username);
+        }
     });
