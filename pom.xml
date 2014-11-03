@@ -28,6 +28,25 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version> <!-- 2.2 is buggy https://issues.apache.org/jira/browse/MTOMCAT-211 -->
+                <configuration>
+                    <path>/</path>
+                    <port>8081</port>
+                    <enableNaming>true</enableNaming>
+                    <finalName>${project.artifactId}.jar</finalName>
+                    <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+            </plugin>
         </plugins>
     </build>
 
@@ -149,6 +168,11 @@
             <artifactId>mockito-core</artifactId>
             <version>1.10.8</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
         </dependency>
     </dependencies>
 </project>
