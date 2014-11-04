@@ -13,7 +13,7 @@ public class Server {
     public static final String BANK_APP = "http://localhost:8081/api/";
 
     public static HttpServer startServer() {
-        return startServer(new BankAppBinder());
+        return createHttpServer(URI.create(BANK_APP), new BankAppConfig());
     }
 
     public static HttpServer startServer(AbstractBinder binder) {

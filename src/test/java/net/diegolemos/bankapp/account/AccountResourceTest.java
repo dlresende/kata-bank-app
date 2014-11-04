@@ -15,7 +15,6 @@ import static java.util.Arrays.asList;
 import static javax.ws.rs.client.Entity.json;
 import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
-import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
 import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -40,7 +39,7 @@ public class AccountResourceTest extends AbstractHttpTest {
 
         Account bobAccount = accountResource.path("bob").request().get(Account.class);
 
-        assertThat(bobAccount.getBalance(), equalTo(0.0));
+        assertThat(bobAccount.balance(), equalTo(0.0));
     }
 
     @Test public void

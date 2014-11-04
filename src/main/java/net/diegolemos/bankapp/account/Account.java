@@ -1,16 +1,18 @@
 package net.diegolemos.bankapp.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import net.diegolemos.bankapp.client.Client;
 import net.diegolemos.bankapp.transaction.Transaction;
 import net.diegolemos.bankapp.transaction.Transactions;
-import org.codehaus.jackson.annotate.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Account {
     private Client holder;
     private Transactions transactions = new Transactions();
 
     @JsonProperty("balance")
-    public double getBalance() {
+    public double balance() {
         return transactions.balance();
     }
 
@@ -49,7 +51,7 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "holder=" + holder +
-                ", balance=" + getBalance() +
+                ", balance=" + balance() +
                 ", transactions=" + transactions +
                 '}';
     }

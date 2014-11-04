@@ -21,7 +21,7 @@ public class DepositIntoAccountStepdefs extends AbstractStepdefs {
     @And("^the account balance for \"([^\"]*)\" is (\\d+) EUR$")
     public void the_balance_for_user_is_EUR(String username, double balance) throws Throwable {
         Account userAccount = accountResource.path(username).request().get(Account.class);
-        assertThat(userAccount.getBalance(), equalTo(balance));
+        assertThat(userAccount.balance(), equalTo(balance));
     }
 
     @When("^\"([^\"]*)\" deposits (\\d+) euros in her bank account$")

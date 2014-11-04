@@ -15,6 +15,6 @@ public class AccountTest {
 
         account.addTransaction(aDeposit().of(10.0).build());
 
-        assertThat(account.getBalance(), equalTo(10.0));
+        assertThat(account.balance(), equalTo(10.0));
     }
 }

@@ -36,6 +36,6 @@ public class CreateAccountStepdefs extends AbstractStepdefs {
     @Then("^balance of his new account is (.+) EUR$")
     public void balance_of_his_new_account_is_EUR(double amount) throws Throwable {
         Account account = accountResource.path(user.getUsername()).request().get(Account.class);
-        assertThat(account.getBalance(), equalTo(amount));
+        assertThat(account.balance(), equalTo(amount));
     }
 }

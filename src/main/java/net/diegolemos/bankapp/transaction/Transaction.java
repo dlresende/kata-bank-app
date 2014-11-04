@@ -1,13 +1,11 @@
 package net.diegolemos.bankapp.transaction;
 
-import java.time.LocalDateTime;
-
-import static java.time.LocalDateTime.now;
+import java.util.Date;
 
 public class Transaction {
     private Action action;
     private double amount;
-    private LocalDateTime date = now();
+    private Date date = now();
 
     public Action getAction() {
         return action;
@@ -25,11 +23,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -65,6 +63,10 @@ public class Transaction {
                 ", amount=" + amount +
                 ", date=" + date +
                 '}';
+    }
+
+    private static Date now() {
+        return new Date();
     }
 
     public enum Action {DEPOSIT}
