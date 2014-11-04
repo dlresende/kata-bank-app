@@ -1,4 +1,4 @@
-Feature:
+Feature: Deposit into account
   As a new customer of the bank
   I want to put money into my account
   In order to have a positive balance
