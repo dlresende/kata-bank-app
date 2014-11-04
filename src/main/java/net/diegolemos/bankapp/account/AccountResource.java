@@ -34,16 +34,16 @@ public class AccountResource {
         return ok(account).build();
     }
 
-    @PUT
-    public Response createAccount(Client client) {
-        accounts.createFor(client);
-        return noContent().build();
-    }
-
     @GET
     public Response getAll() {
         Collection<Account> allAccounts = accounts.all();
         return ok(serializeCollection(allAccounts)).build();
+    }
+
+    @PUT
+    public Response save(Account account) {
+        accounts.save(account);
+        return noContent().build();
     }
 
     private GenericEntity<Collection<Account>> serializeCollection(final Collection<Account> collection) {

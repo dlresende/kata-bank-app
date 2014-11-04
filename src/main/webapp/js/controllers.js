@@ -18,7 +18,7 @@ angular.module('bankApp')
                 var client = $scope.newClient;
                 $http.put('/api/client/' + username, client).success(function() {
                     $scope.listClients();
-                    $http.put('/api/account', client);
+                    $http.put('/api/account', {holder: client});
                     $scope.newClient = {username: ''};
                 });
             }

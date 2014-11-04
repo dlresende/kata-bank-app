@@ -3,6 +3,7 @@ package net.diegolemos.bankapp.account;
 import net.diegolemos.bankapp.AbstractHttpTest;
 import net.diegolemos.bankapp.client.Client;
 import net.diegolemos.bankapp.client.ClientRepository;
+import net.diegolemos.bankapp.transaction.Transaction;
 import org.junit.Test;
 
 import javax.ws.rs.client.WebTarget;
@@ -14,6 +15,8 @@ import static java.util.Arrays.asList;
 import static javax.ws.rs.client.Entity.json;
 import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
+import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
+import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertThat;
@@ -42,9 +45,9 @@ public class AccountResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_create_a_new_account_for_a_given_client() {
-        accountResource.request().put(json(BOB));
+        accountResource.request().put(json(BOB_ACCOUNT));
 
-        verify(accounts).createFor(BOB);
+        verify(accounts).save(BOB_ACCOUNT);
     }
 
     @Test public void
@@ -54,5 +57,16 @@ public class AccountResourceTest extends AbstractHttpTest {
         Collection<Account> accounts = accountResource.request().get(new GenericType<Collection<Account>>() {});
 
         assertThat(accounts, hasItems(BOB_ACCOUNT, EMPTY_ACCOUNT));
+    }
+
+    @Test public void
+    should_add_new_transaction_for_account() {
+        Transaction deposit = aDeposit().of(10).build();
+        Account aliceAccount = new Account();
+        aliceAccount.addTransaction(deposit);
+
+        accountResource.request().put(json(aliceAccount));
+
+        verify(accounts).save(aliceAccount);
     }
 }

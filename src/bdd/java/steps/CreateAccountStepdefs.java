@@ -9,6 +9,7 @@ import net.diegolemos.bankapp.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 import static javax.ws.rs.client.Entity.json;
+import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -28,7 +29,8 @@ public class CreateAccountStepdefs extends AbstractStepdefs {
 
     @When("^the user creates a bank account$")
     public void the_user_creates_a_bank_account() throws Throwable {
-        accountResource.request().put(json(user));
+        Account userAccount = anAccount().withHolder(user).build();
+        accountResource.request().put(json(userAccount));
     }
 
     @Then("^balance of his new account is (.+) EUR$")

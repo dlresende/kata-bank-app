@@ -1,17 +1,17 @@
 package net.diegolemos.bankapp.account;
 
 import net.diegolemos.bankapp.client.Client;
+import net.diegolemos.bankapp.transaction.Transaction;
+import net.diegolemos.bankapp.transaction.Transactions;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Account {
     private Client holder;
-    private double balance;
+    private Transactions transactions = new Transactions();
 
+    @JsonProperty("balance")
     public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
+        return transactions.balance();
     }
 
     public Client getHolder() {
@@ -22,6 +22,14 @@ public class Account {
         this.holder = holder;
     }
 
+    public Transactions getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transactions transactions) {
+        this.transactions = transactions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,25 +37,24 @@ public class Account {
 
         Account account = (Account) o;
 
-        return Double.compare(account.balance, balance) == 0
-                && !(holder != null ? !holder.equals(account.holder) : account.holder != null);
+        return !(holder != null ? !holder.equals(account.holder) : account.holder != null);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = holder != null ? holder.hashCode() : 0;
-        temp = Double.doubleToLongBits(balance);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        return holder != null ? holder.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "holder=" + holder +
-                ", balance=" + balance +
+                ", balance=" + getBalance() +
+                ", transactions=" + transactions +
                 '}';
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
     }
 }
