@@ -41,6 +41,19 @@ public class Transactions {
     }
 
     public double balance() {
-        return transactions.stream().mapToDouble(Transaction::getAmount).sum();
+
+        double balance = 0.0;
+
+        for(Transaction transaction : transactions) {
+            if(transaction.getAction() == Transaction.Action.WITHDRAW) {
+                balance -= transaction.getAmount();
+            }
+
+            else if(transaction.getAction() == Transaction.Action.DEPOSIT) {
+                balance += transaction.getAmount();
+            }
+        }
+
+        return balance;
     }
 }
