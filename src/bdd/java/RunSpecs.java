@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
         features="src/bdd/features/",
         format = {
                 "pretty",
-                "html:target/cucumber"
+                "html:target/cucumber",
+                "json:target/cucumber.json",
+                "junit:target/cucumber.xml"
         })
 public class RunSpecs {
 }
