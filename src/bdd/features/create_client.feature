@@ -1,7 +1,7 @@
 Feature: Create client
   As a person over 18 years old
-  I want to create an account
-  In order to become client of the bank
+  I want to become client
+  In order to access the bank services
 
   Scenario:
     Given a new user "dlemos@mail.com"
