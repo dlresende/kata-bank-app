@@ -3,6 +3,8 @@ package net.diegolemos.bankapp.transaction;
 import java.util.LinkedList;
 import java.util.List;
 
+import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
+
 public class Transactions {
     private List<Transaction> transactions = new LinkedList<>();
 
@@ -41,6 +43,14 @@ public class Transactions {
     }
 
     public double balance() {
-        return transactions.stream().mapToDouble(Transaction::getAmount).sum();
+        double balance = 0.0;
+
+        for(Transaction transaction : transactions) {
+            if(transaction.getAction() == DEPOSIT) {
+                balance += transaction.getAmount();
+            }
+        }
+
+        return balance;
     }
 }
