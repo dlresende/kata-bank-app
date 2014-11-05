@@ -1,15 +1,14 @@
 package net.diegolemos.bankapp.transaction;
 
-import static net.diegolemos.bankapp.transaction.Transaction.Action;
-import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
-
 public class TransactionBuilder {
 
     private double amount;
-    private Action action = DEPOSIT;
+    private Transaction transaction;
 
     public static TransactionBuilder aDeposit() {
-        return new TransactionBuilder();
+        TransactionBuilder transactionBuilder = new TransactionBuilder();
+        transactionBuilder.transaction = new Deposit();
+        return transactionBuilder;
     }
 
     public TransactionBuilder of(double amount) {
@@ -18,9 +17,13 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        Transaction transaction = new Transaction();
-        transaction.setAction(action);
         transaction.setAmount(amount);
         return transaction;
+    }
+
+    public static TransactionBuilder aWithdraw() {
+        TransactionBuilder transactionBuilder = new TransactionBuilder();
+        transactionBuilder.transaction = new Withdraw();
+        return transactionBuilder;
     }
 }

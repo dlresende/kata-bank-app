@@ -69,5 +69,5 @@ public class Transaction {
         return new Date();
     }
 
-    public enum Action {DEPOSIT}
+    public enum Action {WITHDRAW, DEPOSIT}
 }
