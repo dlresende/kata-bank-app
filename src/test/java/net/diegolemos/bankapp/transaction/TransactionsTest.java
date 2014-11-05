@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class TransactionsTest {
 
     @Test public void
-    should_compute_transactions_balance() {
+    should_compute_transactions_balance_for_deposit() {
         Transactions transactions = new Transactions();
         transactions.add(aDeposit().of(10.0).build());
         transactions.add(aDeposit().of(10.0).build());
