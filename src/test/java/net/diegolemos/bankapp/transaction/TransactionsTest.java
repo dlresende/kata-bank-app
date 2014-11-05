@@ -3,7 +3,6 @@ package net.diegolemos.bankapp.transaction;
 import org.junit.Test;
 
 import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
-import static net.diegolemos.bankapp.transaction.TransactionBuilder.aWithdraw;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
@@ -18,16 +17,6 @@ public class TransactionsTest {
         double balance = transactions.balance();
 
         assertThat(balance, equalTo(20.0));
-    }
-
-    @Test public void
-    should_compute_transactions_balance_for_withdraw() {
-        Transactions transactions = new Transactions();
-        transactions.add(aWithdraw().of(10.0).build());
-
-        double balance = transactions.balance();
-
-        assertThat(balance, equalTo(-10.0));
     }
 
     @Test public void
