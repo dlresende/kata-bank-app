@@ -13,14 +13,10 @@ public class TransactionsTest {
         Transactions transactions = new Transactions();
         transactions.add(aDeposit().of(10.0).build());
         transactions.add(aDeposit().of(10.0).build());
-        Transaction withdraw = new Transaction();
-        withdraw.setAction(Transaction.Action.WITHDRAW);
-        withdraw.setAmount(10.0);
-        transactions.add(withdraw);
 
         double balance = transactions.balance();
 
-        assertThat(balance, equalTo(10.0));
+        assertThat(balance, equalTo(20.0));
     }
 
     @Test public void
