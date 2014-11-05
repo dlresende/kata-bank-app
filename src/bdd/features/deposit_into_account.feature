@@ -5,7 +5,6 @@ Feature: Deposit into account
 
   Scenario:
     Given an existing user "mfrih@mail.com"
-    And a bank account for "mfrih@mail.com"
-    And the account balance for "mfrih@mail.com" is 0 EUR
-    When "mfrih@mail.com" deposits 10 euros in her bank account
+    And a new bank account for "mfrih@mail.com"
+    When "mfrih@mail.com" deposits 10 EUR in her bank account
     Then the account balance for "mfrih@mail.com" is 10 EUR

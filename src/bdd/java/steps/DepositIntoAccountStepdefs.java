@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import net.diegolemos.bankapp.account.Account;
@@ -24,15 +25,15 @@ public class DepositIntoAccountStepdefs extends AbstractStepdefs {
         assertThat(userAccount.balance(), equalTo(balance));
     }
 
-    @When("^\"([^\"]*)\" deposits (\\d+) euros in her bank account$")
-    public void deposits_euros_on_the_bank_account(String username, double amount) throws Throwable {
+    @When("^\"([^\"]*)\" deposits (\\d+) EUR in her bank account$")
+    public void deposits_EUR_on_the_bank_account(String username, double amount) throws Throwable {
         Account userAccount = accountResource.path(username).request().get(Account.class);
         userAccount.addTransaction(aDeposit().of(amount).build());
         accountResource.request().put(json(userAccount));
     }
 
-    @And("^a bank account for \"([^\"]*)\"$")
-    public void a_bank_account_for(String username) throws Throwable {
+    @And("^a new bank account for \"([^\"]*)\"$")
+    public void a_new_bank_account_for(String username) throws Throwable {
         Client client = clientResource.path(username).request().get(Client.class);
         Account userAccount = anAccount().withHolder(client).build();
         accountResource.request().put(json(userAccount));
