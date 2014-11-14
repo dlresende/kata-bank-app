@@ -2,7 +2,7 @@
 The goal of this kata is to write new executable specifications for our bank application and implement them using TDD.
 
 ## What to do
- 1. Create the file `src/bdd/features/withdraw_form_account.feature` with the following content:
+ 1. Create the file `src/specs/features/withdraw_form_account.feature` with the following content:
 > Feature: Withdraw from account
 >>  As a customer of the bank
 >>   I want to withdraw money from my account
@@ -14,7 +14,7 @@ The goal of this kata is to write new executable specifications for our bank app
 >>>     And "mfrih@mail.com" deposits 10 EUR in her bank account
 >>>     When "mfrih@mail.com" withdraws 5 EUR from her bank account
 >>>     Then the account balance for "mfrih@mail.com" is 5 EUR
- 2. Create the Java class `src/bdd/java/steps/WithdrawFromAccountStepdefs.java` and implement the steps described in the previous scenario. Use the following template:
+ 2. Create the Java class `src/specs/java/steps/WithdrawFromAccountStepdefs.java` and implement the steps described in the previous scenario. Use the following template:
  ```java
  @When("^\"([^\"]*)\" withdraws (\\d+) EUR from her bank account$")
  public void withdraws_EUR_from_her_bank_account(String username, int amount) throws Throwable {

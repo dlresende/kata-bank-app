@@ -51,7 +51,7 @@
 
     <profiles>
         <profile>
-            <id>bdd</id>
+            <id>specs</id>
 
             <build>
                 <plugins>
@@ -68,7 +68,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>src/bdd/java</source>
+                                        <source>src/specs/java</source>
                                     </sources>
                                 </configuration>
                             </execution>
