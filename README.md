@@ -27,9 +27,9 @@ The goal of this kata is to write new executable specifications for our bank app
 ## Compile & Install (local .m2 repository)
 `mvn clean install`
 
-## Run
-`mvn tomcat7:run`
-The application will be accessible at http://localhost:8081/
-
 ## Run Specifications
 `mvn verify -Pbdd`
+
+## Run webapp
+`mvn tomcat7:run`
+The application will be accessible at [http://localhost:8081/](http://localhost:8081/).
