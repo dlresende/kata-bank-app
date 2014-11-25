@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
+import static net.diegolemos.bankapp.transaction.Transaction.Action.WITHDRAW;
 
 public class Transactions {
     private List<Transaction> transactions = new LinkedList<>();
@@ -48,6 +49,10 @@ public class Transactions {
         for(Transaction transaction : transactions) {
             if(transaction.getAction() == DEPOSIT) {
                 balance += transaction.getAmount();
+            }
+
+            else if(transaction.getAction() == WITHDRAW) {
+                balance -= transaction.getAmount();
             }
         }
 
