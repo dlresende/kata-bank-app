@@ -1,25 +1,31 @@
 package net.diegolemos.bankapp.client;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class Client {
+    @JsonProperty
     private String username;
+
+    @JsonProperty
     private Date birthday;
 
-    public String getUsername() {
+    // Required by ackson
+    private Client() {
+    }
+
+    public Client(String username, Date birthday) {
+        this.username = username;
+        this.birthday = birthday;
+    }
+
+    public String username() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Date getBirthday() {
+    public Date birthday() {
         return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
     }
 
     @Override

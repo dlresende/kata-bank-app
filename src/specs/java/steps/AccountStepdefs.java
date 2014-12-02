@@ -56,7 +56,7 @@ public class AccountStepdefs extends AbstractStepdefs {
 
     @Then("^balance of his new account is (.+) EUR$")
     public void balance_of_his_new_account_is_EUR(double amount) throws Throwable {
-        Account account = accountResource.path(client.getUsername()).request().get(Account.class);
+        Account account = accountResource.path(client.username()).request().get(Account.class);
         assertThat(account.balance(), is(amount));
     }
 
@@ -75,7 +75,7 @@ public class AccountStepdefs extends AbstractStepdefs {
 
     @When("^the client deposits \"([^\"]*)\" EUR into his account$")
     public void the_client_deposits_EUR_into_his_account(double amount) throws Throwable {
-        Account account = accountResource.path(client.getUsername()).request().get(Account.class);
+        Account account = accountResource.path(client.username()).request().get(Account.class);
         try {
             account.deposit(amount);
             accountResource.request().put(json(account));
@@ -85,7 +85,7 @@ public class AccountStepdefs extends AbstractStepdefs {
 
     @Then("^the account balance is \"([^\"]*)\" EUR$")
     public void the_account_balance_is_EUR(double expectedBalance) throws Throwable {
-        Account account = accountResource.path(client.getUsername()).request().get(Account.class);
+        Account account = accountResource.path(client.username()).request().get(Account.class);
         assertThat(account.balance(), is(expectedBalance));
     }
 

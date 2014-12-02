@@ -42,7 +42,7 @@ public class ClientStepdefs extends AbstractStepdefs {
     @Then("^the following client information should be stored in the system:$")
     public void the_following_client_information_should_be_stored_in_the_system(List<Client> expectedClients) throws Throwable {
         Client expectedClient = getOnlyElement(expectedClients);
-        Client existingClient = clientResource.path(client.build().getUsername()).request().get(Client.class);
+        Client existingClient = clientResource.path(client.build().username()).request().get(Client.class);
         assertThat(existingClient, equalTo(expectedClient));
     }
 }

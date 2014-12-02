@@ -11,10 +11,7 @@ public class ClientBuilder {
     }
 
     public Client build() {
-        Client client = new Client();
-        client.setUsername(this.username);
-        client.setBirthday(this.birthday);
-        return client;
+        return new Client(username, birthday);
     }
 
     public ClientBuilder withUsername(String username) {
