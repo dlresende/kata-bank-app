@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 
 public class AccountRepository {
 
@@ -17,7 +16,7 @@ public class AccountRepository {
     }
 
     public void createFor(Client client) {
-        Account account = anAccount().withHolder(client).build();
+        Account account = new Account(client);
         allAccounts.put(client, account);
     }
 

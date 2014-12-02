@@ -4,7 +4,6 @@ import net.diegolemos.bankapp.AbstractHttpTest;
 import net.diegolemos.bankapp.client.Client;
 import net.diegolemos.bankapp.client.ClientRepository;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -12,13 +11,11 @@ import java.util.Collection;
 
 import static java.util.Arrays.asList;
 import static javax.ws.rs.client.Entity.json;
-import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
 public class AccountResourceTest extends AbstractHttpTest {

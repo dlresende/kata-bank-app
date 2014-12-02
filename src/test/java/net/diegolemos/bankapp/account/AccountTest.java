@@ -1,19 +1,22 @@
 package net.diegolemos.bankapp.account;
 
+import net.diegolemos.bankapp.client.Client;
 import org.junit.Before;
 import org.junit.Test;
 
-import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
+import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class AccountTest {
 
+    private static final Client BOB = aClient().withUsername("bob").build();
+
     private Account account;
 
     @Before
     public void initialize() {
-        account = anAccount().build();
+        account = new Account(BOB);
     }
 
     @Test public void

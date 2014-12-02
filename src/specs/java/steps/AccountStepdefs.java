@@ -10,7 +10,6 @@ import net.diegolemos.bankapp.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 import static javax.ws.rs.client.Entity.json;
-import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
@@ -39,7 +38,7 @@ public class AccountStepdefs extends AbstractStepdefs {
     @And("^a new bank account for \"([^\"]*)\"$")
     public void a_new_bank_account_for(String username) throws Throwable {
         Client client = clientResource.path(username).request().get(Client.class);
-        Account userAccount = anAccount().withHolder(client).build();
+        Account userAccount = new Account(client);
         accountResource.request().put(json(userAccount));
     }
 
@@ -51,7 +50,7 @@ public class AccountStepdefs extends AbstractStepdefs {
 
     @When("^the user creates a bank account$")
     public void the_user_creates_a_bank_account() throws Throwable {
-        Account userAccount = anAccount().withHolder(client).build();
+        Account userAccount = new Account(client);
         accountResource.request().put(json(userAccount));
     }
 
@@ -69,7 +68,7 @@ public class AccountStepdefs extends AbstractStepdefs {
 
     @And("^the balance for the client account is \"([^\"]*)\"$")
     public void the_balance_for_the_client_account_is(double amount) throws Throwable {
-        Account userAccount = anAccount().withHolder(client).build();
+        Account userAccount = new Account(client);
         assertThat(userAccount.balance(), equalTo(amount));
         accountResource.request().put(json(userAccount));
     }
@@ -92,7 +91,7 @@ public class AccountStepdefs extends AbstractStepdefs {
 
     @When("^a bank account is created for the client$")
     public void a_bank_account_is_created_for_the_client() throws Throwable {
-        Account userAccount = anAccount().withHolder(client).build();
+        Account userAccount = new Account(client);
         accountResource.request().put(json(userAccount));
     }
 }
