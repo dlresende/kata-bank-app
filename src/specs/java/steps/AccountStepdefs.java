@@ -6,15 +6,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.diegolemos.bankapp.account.Account;
 import net.diegolemos.bankapp.client.Client;
-import net.diegolemos.bankapp.transaction.Deposit;
 
 import javax.ws.rs.client.WebTarget;
 
 import static javax.ws.rs.client.Entity.json;
 import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
-import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class AccountStepdefs extends AbstractStepdefs {
@@ -27,13 +26,13 @@ public class AccountStepdefs extends AbstractStepdefs {
     @And("^the account balance for \"([^\"]*)\" is (\\d+) EUR$")
     public void the_balance_for_user_is_EUR(String username, double balance) throws Throwable {
         Account userAccount = accountResource.path(username).request().get(Account.class);
-        assertThat(userAccount.balance(), equalTo(balance));
+        assertThat(userAccount.balance(), is(balance));
     }
 
     @When("^\"([^\"]*)\" deposits (\\d+) EUR in her bank account$")
     public void deposits_EUR_on_the_bank_account(String username, double amount) throws Throwable {
         Account userAccount = accountResource.path(username).request().get(Account.class);
-        userAccount.addTransaction(aDeposit().of(amount).build());
+        userAccount.deposit(amount);
         accountResource.request().put(json(userAccount));
     }
 
@@ -59,7 +58,7 @@ public class AccountStepdefs extends AbstractStepdefs {
     @Then("^balance of his new account is (.+) EUR$")
     public void balance_of_his_new_account_is_EUR(double amount) throws Throwable {
         Account account = accountResource.path(client.getUsername()).request().get(Account.class);
-        assertThat(account.balance(), equalTo(amount));
+        assertThat(account.balance(), is(amount));
     }
 
     @Given("^an existing client with username \"([^\"]*)\"$")
@@ -79,8 +78,7 @@ public class AccountStepdefs extends AbstractStepdefs {
     public void the_client_deposits_EUR_into_his_account(double amount) throws Throwable {
         Account account = accountResource.path(client.getUsername()).request().get(Account.class);
         try {
-            Deposit deposit = new Deposit(amount);
-            account.addTransaction(deposit);
+            account.deposit(amount);
             accountResource.request().put(json(account));
         } catch (IllegalStateException ignored) {
         }
@@ -89,7 +87,7 @@ public class AccountStepdefs extends AbstractStepdefs {
     @Then("^the account balance is \"([^\"]*)\" EUR$")
     public void the_account_balance_is_EUR(double expectedBalance) throws Throwable {
         Account account = accountResource.path(client.getUsername()).request().get(Account.class);
-        assertThat(account.balance(), equalTo(expectedBalance));
+        assertThat(account.balance(), is(expectedBalance));
     }
 
     @When("^a bank account is created for the client$")

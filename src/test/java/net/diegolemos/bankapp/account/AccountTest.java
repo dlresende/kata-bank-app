@@ -1,20 +1,33 @@
 package net.diegolemos.bankapp.account;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
-import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class AccountTest {
 
+    private Account account;
+
+    @Before
+    public void initialize() {
+        account = anAccount().build();
+    }
+
     @Test public void
-    should_credit_user_balance_when_on_deposit() {
-        Account account = anAccount().build();
+    should_calculate_balance_for_many_transactions() {
+        account.deposit(10.0);
+        account.deposit(20.0);
 
-        account.addTransaction(aDeposit().of(10.0).build());
+        assertThat(account.balance(), is(30.0));
+    }
 
-        assertThat(account.balance(), equalTo(10.0));
+    @Test public void
+    should_deposit_money_into_account() {
+        account.deposit(10.0);
+
+        assertThat(account.balance(), is(10.0));
     }
 }

@@ -18,6 +18,7 @@ import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
 import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -33,13 +34,13 @@ public class AccountResourceTest extends AbstractHttpTest {
     private WebTarget accountResource = resource("account");
 
     @Test public void
-    should_get_the_account_balance_for_a_given_user() {
+    should_get_the_account_balance_for_a_given_client() {
         given(clients.withUsername("bob")).willReturn(BOB);
         given(accounts.forHolder(BOB)).willReturn(BOB_ACCOUNT);
 
         Account bobAccount = accountResource.path("bob").request().get(Account.class);
 
-        assertThat(bobAccount.balance(), equalTo(0.0));
+        assertThat(bobAccount.balance(), is(0.0));
     }
 
     @Test public void
@@ -60,12 +61,11 @@ public class AccountResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_add_new_transaction_for_account() {
-        Transaction deposit = aDeposit().of(10).build();
-        Account aliceAccount = new Account();
-        aliceAccount.addTransaction(deposit);
+        Account account = new Account();
+        account.deposit(10);
 
-        accountResource.request().put(json(aliceAccount));
+        accountResource.request().put(json(account));
 
-        verify(accounts).save(aliceAccount);
+        verify(accounts).save(account);
     }
 }

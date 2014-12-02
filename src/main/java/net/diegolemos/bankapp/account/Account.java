@@ -3,6 +3,7 @@ package net.diegolemos.bankapp.account;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.diegolemos.bankapp.client.Client;
+import net.diegolemos.bankapp.transaction.Deposit;
 import net.diegolemos.bankapp.transaction.Transaction;
 import net.diegolemos.bankapp.transaction.Transactions;
 
@@ -56,7 +57,7 @@ public class Account {
                 '}';
     }
 
-    public void addTransaction(Transaction transaction) {
-        transactions.add(transaction);
+    public void deposit(double amount) {
+        transactions.add(new Deposit(amount));
     }
 }
