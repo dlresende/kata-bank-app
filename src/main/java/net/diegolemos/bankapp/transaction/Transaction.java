@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Transaction {
     @JsonProperty
-    private Action action;
+    private Type type;
 
     @JsonProperty
     private double amount;
@@ -18,13 +18,13 @@ public class Transaction {
     private Transaction() {
     }
 
-    public Transaction(Action action, double amount) {
-        this.action = action;
+    public Transaction(Type type, double amount) {
+        this.type = type;
         this.amount = amount;
     }
 
-    public Action type() {
-        return action;
+    public Type type() {
+        return type;
     }
 
     public double amount() {
@@ -43,7 +43,7 @@ public class Transaction {
         Transaction that = (Transaction) o;
 
         if (Double.compare(that.amount, amount) != 0) return false;
-        if (action != that.action) return false;
+        if (type != that.type) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
 
         return true;
@@ -53,7 +53,7 @@ public class Transaction {
     public int hashCode() {
         int result;
         long temp;
-        result = action != null ? action.hashCode() : 0;
+        result = type != null ? type.hashCode() : 0;
         temp = Double.doubleToLongBits(amount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (date != null ? date.hashCode() : 0);
@@ -63,7 +63,7 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "action=" + action +
+                "type=" + type +
                 ", amount=" + amount +
                 ", date=" + date +
                 '}';
@@ -73,5 +73,5 @@ public class Transaction {
         return new Date();
     }
 
-    public enum Action {WITHDRAW, DEPOSIT}
+    public enum Type {WITHDRAW, DEPOSIT}
 }

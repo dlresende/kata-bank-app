@@ -1,6 +1,6 @@
 package net.diegolemos.bankapp.transaction;
 
-import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
+import static net.diegolemos.bankapp.transaction.Transaction.Type.DEPOSIT;
 
 public class Deposit extends Transaction {
 

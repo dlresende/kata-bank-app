@@ -2,7 +2,7 @@ package net.diegolemos.bankapp.transaction;
 
 import org.junit.Test;
 
-import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
+import static net.diegolemos.bankapp.transaction.Transaction.Type.DEPOSIT;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

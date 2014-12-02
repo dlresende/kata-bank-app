@@ -3,8 +3,8 @@ package net.diegolemos.bankapp.transaction;
 import java.util.LinkedList;
 import java.util.List;
 
-import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
-import static net.diegolemos.bankapp.transaction.Transaction.Action.WITHDRAW;
+import static net.diegolemos.bankapp.transaction.Transaction.Type.DEPOSIT;
+import static net.diegolemos.bankapp.transaction.Transaction.Type.WITHDRAW;
 
 public class Transactions {
     private List<Transaction> transactions = new LinkedList<>();
