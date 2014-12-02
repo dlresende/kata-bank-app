@@ -8,28 +8,30 @@ import net.diegolemos.bankapp.transaction.Transactions;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Account {
+    @JsonProperty
     private Client holder;
+
+    @JsonProperty
     private Transactions transactions = new Transactions();
+
+    // Required by Jackon
+    private Account() {}
+
+    public Account(Client holder) {
+        this.holder = holder;
+    }
+
+    public Client holder() {
+        return holder;
+    }
 
     @JsonProperty("balance")
     public double balance() {
         return transactions.balance();
     }
 
-    public Client getHolder() {
-        return holder;
-    }
-
-    public void setHolder(Client holder) {
-        this.holder = holder;
-    }
-
-    public Transactions getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Transactions transactions) {
-        this.transactions = transactions;
+    public void deposit(double amount) {
+        transactions.add(new Deposit(amount));
     }
 
     @Override
@@ -54,9 +56,5 @@ public class Account {
                 ", balance=" + balance() +
                 ", transactions=" + transactions +
                 '}';
-    }
-
-    public void deposit(double amount) {
-        transactions.add(new Deposit(amount));
     }
 }

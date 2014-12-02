@@ -14,8 +14,7 @@ public class AccountBuilderTest {
 
     @Test public void
     should_create_an_account_with_holder() {
-        Account aliceAccount = new Account();
-        aliceAccount.setHolder(ALICE);
+        Account aliceAccount = new Account(ALICE);
 
         assertThat(aliceAccount, equalTo(anAccount().withHolder(ALICE).build()));
     }

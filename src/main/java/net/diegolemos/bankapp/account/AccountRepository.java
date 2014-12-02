@@ -26,6 +26,6 @@ public class AccountRepository {
     }
 
     public void save(Account account) {
-        allAccounts.put(account.getHolder(), account);
+        allAccounts.put(account.holder(), account);
     }
 }

@@ -16,8 +16,7 @@ public class AccountBuilder {
     }
 
     public Account build() {
-        Account account = new Account();
-        account.setHolder(holder);
+        Account account = new Account(holder);
         return account;
     }
 }

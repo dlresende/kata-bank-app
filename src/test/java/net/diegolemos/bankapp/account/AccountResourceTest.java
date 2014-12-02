@@ -4,6 +4,7 @@ import net.diegolemos.bankapp.AbstractHttpTest;
 import net.diegolemos.bankapp.client.Client;
 import net.diegolemos.bankapp.client.ClientRepository;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -17,13 +18,15 @@ import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
 public class AccountResourceTest extends AbstractHttpTest {
 
+    private static final Client ALICE = aClient().withUsername("alice").build();
     private static final Client BOB = aClient().withUsername("bob").build();
-    private static final Account EMPTY_ACCOUNT = new Account();
-    private static final Account BOB_ACCOUNT = anAccount().withHolder(BOB).build();
+    private static final Account ALICE_ACCOUNT = new Account(ALICE);
+    private static final Account BOB_ACCOUNT = new Account(BOB);
 
     private ClientRepository clients = injectMock(ClientRepository.class);
     private AccountRepository accounts = injectMock(AccountRepository.class);
@@ -48,16 +51,16 @@ public class AccountResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_get_all_accounts() {
-        given(accounts.all()).willReturn(asList(BOB_ACCOUNT, EMPTY_ACCOUNT));
+        given(accounts.all()).willReturn(asList(BOB_ACCOUNT, ALICE_ACCOUNT));
 
         Collection<Account> accounts = accountResource.request().get(new GenericType<Collection<Account>>() {});
 
-        assertThat(accounts, hasItems(BOB_ACCOUNT, EMPTY_ACCOUNT));
+        assertThat(accounts, hasItems(BOB_ACCOUNT, ALICE_ACCOUNT));
     }
 
     @Test public void
-    should_add_new_transaction_for_account() {
-        Account account = new Account();
+    should_update_account() {
+        Account account = new Account(ALICE);
         account.deposit(10);
 
         accountResource.request().put(json(account));
