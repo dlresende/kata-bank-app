@@ -11,7 +11,7 @@ public class Client {
     @JsonProperty
     private Date birthday;
 
-    // Required by ackson
+    // Required by Jackson
     private Client() {
     }
 

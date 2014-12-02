@@ -14,7 +14,7 @@ public class Account {
     @JsonProperty
     private Transactions transactions = new Transactions();
 
-    // Required by Jackon
+    // Required by Jackson
     private Account() {}
 
     public Account(Client holder) {
