@@ -1,34 +1,38 @@
 package net.diegolemos.bankapp.transaction;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class Transaction {
+    @JsonProperty
     private Action action;
+
+    @JsonProperty
     private double amount;
+
+    @JsonProperty
     private Date date = now();
 
-    public Action getAction() {
-        return action;
+    // Required by Jackson
+    private Transaction() {
     }
 
-    public void setAction(Action action) {
+    public Transaction(Action action, double amount) {
         this.action = action;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Date getDate() {
-        return date;
+    public Action type() {
+        return action;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public double amount() {
+        return amount;
+    }
+
+    public Date date() {
+        return date;
     }
 
     @Override

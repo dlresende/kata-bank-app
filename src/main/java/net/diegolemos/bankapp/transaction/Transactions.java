@@ -47,12 +47,12 @@ public class Transactions {
         double balance = 0.0;
 
         for(Transaction transaction : transactions) {
-            if(transaction.getAction() == DEPOSIT) {
-                balance += transaction.getAmount();
+            if(transaction.type() == DEPOSIT) {
+                balance += transaction.amount();
             }
 
-            else if(transaction.getAction() == WITHDRAW) {
-                balance -= transaction.getAmount();
+            else if(transaction.type() == WITHDRAW) {
+                balance -= transaction.amount();
             }
         }
 
