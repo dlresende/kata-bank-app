@@ -20,10 +20,4 @@ public class TransactionBuilder {
         transaction.setAmount(amount);
         return transaction;
     }
-
-    public static TransactionBuilder aWithdraw() {
-        TransactionBuilder transactionBuilder = new TransactionBuilder();
-        transactionBuilder.transaction = new Withdraw();
-        return transactionBuilder;
-    }
 }
