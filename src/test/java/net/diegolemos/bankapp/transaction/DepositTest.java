@@ -5,7 +5,7 @@ import org.junit.Test;
 import static net.diegolemos.bankapp.transaction.Transaction.Action.DEPOSIT;
 import static net.diegolemos.bankapp.transaction.Transaction.Action.WITHDRAW;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class DepositTest {
 

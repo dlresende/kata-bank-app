@@ -1,7 +1,6 @@
 package net.diegolemos.bankapp;
 
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.junit.After;
@@ -14,7 +13,8 @@ import java.util.List;
 
 import static javax.ws.rs.client.ClientBuilder.newClient;
 import static net.diegolemos.bankapp.BankAppBinder.factory;
-import static net.diegolemos.bankapp.Server.*;
+import static net.diegolemos.bankapp.Server.BANK_APP;
+import static net.diegolemos.bankapp.Server.startServer;
 import static org.mockito.Mockito.mock;
 
 public abstract class AbstractHttpTest {

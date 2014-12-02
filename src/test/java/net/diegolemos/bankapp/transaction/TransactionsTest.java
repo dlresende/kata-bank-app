@@ -2,35 +2,20 @@ package net.diegolemos.bankapp.transaction;
 
 import org.junit.Test;
 
-import static net.diegolemos.bankapp.transaction.Transaction.Action.WITHDRAW;
-import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class TransactionsTest {
 
     @Test public void
-    should_compute_transactions_balance_for_deposit() {
+    should_compute_transactions_balance() {
         Transactions transactions = new Transactions();
-        transactions.add(aDeposit().of(10.0).build());
-        transactions.add(aDeposit().of(10.0).build());
+        transactions.add(new Deposit(10.0));
+        transactions.add(new Deposit(10.0));
 
         double balance = transactions.balance();
 
-        assertThat(balance, equalTo(20.0));
-    }
-
-    @Test public void
-    should_compute_transactions_balance_from_withdraw() {
-        Transaction withdraw = new Transaction();
-        withdraw.setAction(WITHDRAW);
-        withdraw.setAmount(5.0);
-        Transactions transactions = new Transactions();
-        transactions.add(withdraw);
-
-        double balance = transactions.balance();
-
-        assertThat(balance, equalTo(-5.0));
+        assertThat(balance, is(20.0));
     }
 
     @Test public void
@@ -39,6 +24,6 @@ public class TransactionsTest {
 
         double balance = transactions.balance();
 
-        assertThat(balance, equalTo(0.0));
+        assertThat(balance, is(0.0));
     }
 }

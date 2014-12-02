@@ -3,20 +3,16 @@ package net.diegolemos.bankapp.account;
 import net.diegolemos.bankapp.AbstractHttpTest;
 import net.diegolemos.bankapp.client.Client;
 import net.diegolemos.bankapp.client.ClientRepository;
-import net.diegolemos.bankapp.transaction.Transaction;
 import org.junit.Test;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-
 import java.util.Collection;
 
 import static java.util.Arrays.asList;
 import static javax.ws.rs.client.Entity.json;
 import static net.diegolemos.bankapp.account.AccountBuilder.anAccount;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
-import static net.diegolemos.bankapp.transaction.TransactionBuilder.aDeposit;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
