@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.LinkedList;
 import java.util.List;
 
-import static net.diegolemos.bankapp.transaction.Transaction.Type.DEPOSIT;
-import static net.diegolemos.bankapp.transaction.Transaction.Type.WITHDRAW;
-
 public class Transactions {
     @JsonProperty
     private List<Transaction> transactions = new LinkedList<>();
@@ -17,19 +14,7 @@ public class Transactions {
     }
 
     public double balance() {
-        double balance = 0.0;
-
-        for(Transaction transaction : transactions) {
-            if(transaction.type() == DEPOSIT) {
-                balance += transaction.amount();
-            }
-
-            else if(transaction.type() == WITHDRAW) {
-                balance -= transaction.amount();
-            }
-        }
-
-        return balance;
+        return transactions.stream().mapToDouble(Transaction::amount).sum();
     }
 
     @Override
