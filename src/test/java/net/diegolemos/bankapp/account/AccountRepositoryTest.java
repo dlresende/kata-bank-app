@@ -23,9 +23,9 @@ public class AccountRepositoryTest {
 
     @Test public void
     should_find_account_by_username() {
-        accounts.createFor(BOB);
+        accounts.save(BOB_ACCOUNT);
 
-        Account bobAccount = accounts.forHolder(BOB);
+        Account bobAccount = accounts.forClient(BOB);
 
         assertThat(bobAccount, equalTo(BOB_ACCOUNT));
     }

@@ -20,7 +20,7 @@ public class AccountTest {
     }
 
     @Test public void
-    should_calculate_balance_for_many_transactions() {
+    should_calculate_balance_for_transactions() {
         account.deposit(10.0);
         account.deposit(20.0);
 

@@ -9,7 +9,7 @@ import net.diegolemos.bankapp.transaction.Transactions;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Account {
     @JsonProperty
-    private Client holder;
+    private Client client;
 
     @JsonProperty
     private Transactions transactions = new Transactions();
@@ -17,12 +17,12 @@ public class Account {
     // Required by Jackson
     private Account() {}
 
-    public Account(Client holder) {
-        this.holder = holder;
+    public Account(Client client) {
+        this.client = client;
     }
 
     public Client holder() {
-        return holder;
+        return client;
     }
 
     @JsonProperty("balance")
@@ -41,18 +41,18 @@ public class Account {
 
         Account account = (Account) o;
 
-        return !(holder != null ? !holder.equals(account.holder) : account.holder != null);
+        return !(client != null ? !client.equals(account.client) : account.client != null);
     }
 
     @Override
     public int hashCode() {
-        return holder != null ? holder.hashCode() : 0;
+        return client != null ? client.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "holder=" + holder +
+                "client=" + client +
                 ", balance=" + balance() +
                 ", transactions=" + transactions +
                 '}';

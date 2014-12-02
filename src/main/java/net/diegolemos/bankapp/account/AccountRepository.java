@@ -11,7 +11,7 @@ public class AccountRepository {
 
     private final Map<Client, Account> allAccounts = new HashMap<>();
 
-    public Account forHolder(Client client) {
+    public Account forClient(Client client) {
         return allAccounts.get(client);
     }
 

@@ -30,7 +30,7 @@ public class AccountResource {
     @Path("{username}")
     public Response getByUsername(@PathParam("username") String username) {
         Client client = clients.withUsername(username);
-        Account account = accounts.forHolder(client);
+        Account account = accounts.forClient(client);
         return ok(account).build();
     }
 

@@ -32,7 +32,7 @@ public class AccountResourceTest extends AbstractHttpTest {
     @Test public void
     should_get_the_account_balance_for_a_given_client() {
         given(clients.withUsername("bob")).willReturn(BOB);
-        given(accounts.forHolder(BOB)).willReturn(BOB_ACCOUNT);
+        given(accounts.forClient(BOB)).willReturn(BOB_ACCOUNT);
 
         Account bobAccount = accountResource.path("bob").request().get(Account.class);
 
