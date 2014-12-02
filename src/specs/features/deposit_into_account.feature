@@ -1,10 +1,16 @@
 Feature: Deposit into account
-  As a new customer of the bank
+  As a client
   I want to put money into my account
   In order to have a positive balance
 
-  Scenario:
-    Given an existing user "mfrih@mail.com"
-    And a new bank account for "mfrih@mail.com"
-    When "mfrih@mail.com" deposits 10 EUR in her bank account
-    Then the account balance for "mfrih@mail.com" is 10 EUR
+  Scenario: An existing client deposits money into his account
+    Given an existing client with username "maria"
+    And the balance for the client account is "0.0"
+    When the client deposits "10.0" EUR into his account
+    Then the account balance is "10.0" EUR
+
+  Scenario: An existing client cannot deposit negative values
+    Given an existing client with username "maria"
+    And the balance for the client account is "0.0"
+    When the client deposits "-10.0" EUR into his account
+    Then the account balance is "0.0" EUR

@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features="src/specs/features/",
+        strict = true,
         format = {
                 "pretty",
                 "html:target/cucumber",
