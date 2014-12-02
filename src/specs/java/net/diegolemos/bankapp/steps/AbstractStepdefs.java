@@ -1,4 +1,4 @@
-package steps;
+package net.diegolemos.bankapp.steps;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 
