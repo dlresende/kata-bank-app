@@ -2,6 +2,7 @@ package net.diegolemos.bankapp.transaction;
 
 import org.junit.Test;
 
+import static net.diegolemos.bankapp.transaction.Transaction.deposit;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -10,8 +11,8 @@ public class TransactionsTest {
     @Test public void
     should_compute_transactions_balance() {
         Transactions transactions = new Transactions();
-        transactions.add(new Deposit(10.0));
-        transactions.add(new Deposit(10.0));
+        transactions.add(deposit(10.0));
+        transactions.add(deposit(10.0));
 
         double balance = transactions.balance();
 

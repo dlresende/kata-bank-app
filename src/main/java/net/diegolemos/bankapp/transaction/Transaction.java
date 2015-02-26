@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+import static net.diegolemos.bankapp.transaction.Transaction.Type.DEPOSIT;
+
 public class Transaction {
     @JsonProperty
     private Type type;
@@ -21,6 +23,14 @@ public class Transaction {
     public Transaction(Type type, double amount) {
         this.type = type;
         this.amount = amount;
+    }
+
+    public static Transaction deposit(double amount) {
+        if(isNegative(amount)) {
+            throw new IllegalStateException("Values for deposits must be positive. Invalid value: " + amount);
+        }
+
+        return new Transaction(DEPOSIT, amount);
     }
 
     public Type type() {
@@ -73,5 +83,9 @@ public class Transaction {
         return new Date();
     }
 
-    public enum Type {WITHDRAW, DEPOSIT}
+    protected static boolean isNegative(double amount) {
+        return amount < 0;
+    }
+
+    public enum Type {DEPOSIT}
 }

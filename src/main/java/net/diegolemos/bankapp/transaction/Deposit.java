@@ -12,7 +12,4 @@ public class Deposit extends Transaction {
         }
     }
 
-    private boolean isNegative(double amount) {
-        return amount < 0;
-    }
 }
