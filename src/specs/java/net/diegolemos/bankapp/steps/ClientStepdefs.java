@@ -1,11 +1,9 @@
 package net.diegolemos.bankapp.steps;
 
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.diegolemos.bankapp.client.Client;
-import net.diegolemos.bankapp.client.ClientBuilder;
 
 import javax.ws.rs.client.WebTarget;
 import java.util.Date;
@@ -21,28 +19,29 @@ public class ClientStepdefs extends AbstractStepdefs {
 
     private final WebTarget clientResource = resource("client");
 
-    private ClientBuilder client;
+    private Client client;
 
-    @Before
-    public void refresh() {
-        client = aClient();
+    @Given("^\"([^\"]*)\" born on \"([^\"]*)\"$")
+    public void born_on(String username, Date birthday) throws Throwable {
+        client = aClient().withUsername(username).withBirthday(birthday).build();
     }
 
-    @Given("^a person born in \"([^\"]*)\"$")
-    public void a_person_born_in(Date birthday) throws Throwable {
-        client.withBirthday(birthday);
-    }
-
-    @When("^this person becomes a client with the username \"([^\"]*)\"$")
-    public void this_person_becomes_a_client_with_the_username(String username) throws Throwable {
-        Client client = this.client.withUsername(username).build();
-        clientResource.path(username).request().put(json(client));
+    @When("^he becomes a client$")
+    public void he_becomes_a_client() throws Throwable {
+        clientResource.path(client.username()).request().put(json(client));
     }
 
     @Then("^the following client information should be stored in the system:$")
     public void the_following_client_information_should_be_stored_in_the_system(List<Client> expectedClients) throws Throwable {
         Client expectedClient = getOnlyElement(expectedClients);
-        Client existingClient = clientResource.path(client.build().username()).request().get(Client.class);
+        Client existingClient = clientResource.path(client.username()).request().get(Client.class);
+        assertThat(existingClient, equalTo(expectedClient));
+    }
+
+    @Then("^the following information should be stored in the system:$")
+    public void the_following_information_should_be_stored_in_the_system(List<Client> expectedClients) throws Throwable {
+        Client expectedClient = getOnlyElement(expectedClients);
+        Client existingClient = clientResource.path(client.username()).request().get(Client.class);
         assertThat(existingClient, equalTo(expectedClient));
     }
 }
