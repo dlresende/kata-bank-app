@@ -2,6 +2,7 @@
 The goal of this kata is to write new executable specifications for our bank application and implement them using TDD.
 
 ## What to do
+### Step 1
 1.Create the file `src/specs/features/withdraw_form_account.feature` with the following content:
 ```gherkin
  Feature: Withdraw from account
@@ -17,6 +18,9 @@ The goal of this kata is to write new executable specifications for our bank app
 2.Create the Java class `src/specs/java/steps/WithdrawFromAccountStepdefs.java` and implement the steps described in the previous scenario.
 3.By doing TDD, implement the 'withdraw' feature just added before.
 4.(Optional) Expose the new withdraw feature in the UI.
+
+### Step 2
+Now add a scenario in the previous added feature for the case when a withdrawal generates an overdraft (clients that have balance 0.0 and withdraws must have balance 0.0 after the operation).
 
 ## Compile & Install (local .m2 repository)
 `mvn clean install`
