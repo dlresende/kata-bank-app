@@ -28,6 +28,7 @@ public class AccountStepdefs extends AbstractStepdefs {
     public void an_existing_client_named_with_EUR_in_her_account(String username, double balance) throws Throwable {
         an_existing_client_named(username);
         he_opens_a_bank_account();
+        she_deposits_EUR_into_her_account(balance);
         the_balance_is_EUR(balance);
     }
 
