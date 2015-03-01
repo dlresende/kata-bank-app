@@ -1,5 +1,5 @@
 # Kata BDD: Bank Application
-The goal of this kata is to write new executable specifications for our bank application and implement them using TDD.
+The goal of this kata is to write new executable specifications for our bank application and implement them using TDD. In this way, you will be doing [Outside-In development with Double Loop TDD](http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/).
 
 ## What to do
 ### Step 1
