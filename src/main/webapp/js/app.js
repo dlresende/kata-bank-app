@@ -11,7 +11,7 @@ angular.module('bankApp', ['ngRoute'])
                 controller:'AccountsCtrl',
                 templateUrl:'partials/accounts.html'
             })
-            .when('/accounts/:username', {
+            .when('/account/:username', {
                 controller:'AccountsCtrl',
                 templateUrl:'partials/accounts.html'
             })
