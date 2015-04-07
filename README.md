@@ -15,7 +15,7 @@ The goal of this kata is to write new executable specifications for our bank app
        When he withdraws 10.0 EUR into his account
        Then the new balance is 90.0 EUR
 ```
-2.Create the Java class `src/specs/java/steps/WithdrawFromAccountStepdefs.java` and implement the steps described in the previous scenario.
+2.Implement the missing steps described in the previous scenario in the class `net.diegolemos.bankapp.steps.AccountStepdefs`.
 
 3.By doing TDD, implement the 'withdraw' feature just added before.
 
