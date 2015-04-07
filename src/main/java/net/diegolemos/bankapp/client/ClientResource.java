@@ -14,29 +14,29 @@ import static javax.ws.rs.core.Response.ok;
 @Produces("application/json;charset=utf-8")
 public class ClientResource {
 
-    private final ClientRepository clients;
+    private final ClientService clientService;
 
     @Inject
-    public ClientResource(ClientRepository clients) {
-        this.clients = clients;
+    public ClientResource(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @PUT
     @Path("{username}")
     public Response save(@PathParam("username") String username, Client client) {
-        clients.add(username, client);
+        clientService.save(client);
         return noContent().build();
     }
 
     @GET
     @Path("{username}")
     public Response getByUsername(@PathParam("username") String username) {
-        return ok(clients.withUsername(username)).build();
+        return ok(clientService.findByUsername(username)).build();
     }
 
     @GET
     public Response getAll() {
-        Collection<Client> allClients = clients.all();
+        Collection<Client> allClients = clientService.all();
         return ok(serializeCollection(allClients)).build();
     }
 

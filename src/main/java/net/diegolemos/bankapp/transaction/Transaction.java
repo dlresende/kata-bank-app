@@ -25,6 +25,7 @@ public class Transaction {
         this.amount = amount;
     }
 
+    // Creation method
     public static Transaction deposit(double amount) {
         if(isNegative(amount)) {
             throw new IllegalStateException("Values for deposits must be positive. Invalid value: " + amount);

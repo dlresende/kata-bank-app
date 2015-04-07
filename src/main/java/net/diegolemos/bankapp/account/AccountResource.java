@@ -1,8 +1,5 @@
 package net.diegolemos.bankapp.account;
 
-import net.diegolemos.bankapp.client.Client;
-import net.diegolemos.bankapp.client.ClientRepository;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -17,32 +14,28 @@ import static javax.ws.rs.core.Response.ok;
 @Produces("application/json;charset=utf-8")
 public class AccountResource {
 
-    private final AccountRepository accounts;
-    private final ClientRepository clients;
+    private final AccountService accountService;
 
     @Inject
-    public AccountResource(AccountRepository accounts, ClientRepository clients) {
-        this.accounts = accounts;
-        this.clients = clients;
+    public AccountResource(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GET
     @Path("{username}")
     public Response getByUsername(@PathParam("username") String username) {
-        Client client = clients.withUsername(username);
-        Account account = accounts.forClient(client);
+        Account account = accountService.findBy(username);
         return ok(account).build();
     }
 
     @GET
     public Response getAll() {
-        Collection<Account> allAccounts = accounts.all();
-        return ok(serializeCollection(allAccounts)).build();
+        return ok(serializeCollection(accountService.all())).build();
     }
 
     @PUT
     public Response save(Account account) {
-        accounts.save(account);
+        accountService.save(account);
         return noContent().build();
     }
 
