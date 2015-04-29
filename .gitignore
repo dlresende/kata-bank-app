@@ -38,3 +38,7 @@ gc.log
 target/
 
 .gitignore
+
+.classpath
+.project
+.settings/
