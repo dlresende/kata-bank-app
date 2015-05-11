@@ -3,7 +3,7 @@ The goal of this kata is to write new executable specifications for our bank app
 
 ## What to do
 ### Step 1
-1.Create the file `src/specs/features/withdraw_form_account.feature` with the following content:
+1.Create the file `src/specs/features/withdraw_from_account.feature` with the following content:
 ```gherkin
  Feature: Withdraw from account
    As a client of the bank
