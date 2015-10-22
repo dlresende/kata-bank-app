@@ -20,8 +20,6 @@
     <build>
         <finalName>bank-app</finalName>
 
-        <testSourceDirectory>src/specs/java</testSourceDirectory>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
