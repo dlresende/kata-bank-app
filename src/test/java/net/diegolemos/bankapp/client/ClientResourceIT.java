@@ -1,6 +1,6 @@
 package net.diegolemos.bankapp.client;
 
-import net.diegolemos.bankapp.AbstractHttpTest;
+import net.diegolemos.bankapp.HttpServerIT;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
-public class ClientResourceIT extends AbstractHttpTest {
+public class ClientResourceIT extends HttpServerIT {
 
     private static final Client BOB = aClient().withUsername("bob").build();
     private static final Client ALICE = aClient().withUsername("alice").build();

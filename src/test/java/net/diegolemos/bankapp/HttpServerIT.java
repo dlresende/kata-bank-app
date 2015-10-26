@@ -10,7 +10,7 @@ import javax.ws.rs.client.WebTarget;
 import static javax.ws.rs.client.ClientBuilder.newClient;
 import static net.diegolemos.bankapp.MyServer.BANK_APP;
 
-public abstract class AbstractHttpTest {
+public abstract class HttpServerIT {
 
     private HttpServer server;
 
