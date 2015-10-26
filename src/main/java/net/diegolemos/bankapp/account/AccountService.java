@@ -3,12 +3,14 @@ package net.diegolemos.bankapp.account;
 import net.diegolemos.bankapp.client.Client;
 import net.diegolemos.bankapp.client.ClientRepository;
 
+import javax.inject.Inject;
 import java.util.Collection;
 
 public class AccountService {
     private final AccountRepository accounts;
     private final ClientRepository clients;
 
+    @Inject
     public AccountService(AccountRepository accounts, ClientRepository clients) {
         this.accounts = accounts;
         this.clients = clients;

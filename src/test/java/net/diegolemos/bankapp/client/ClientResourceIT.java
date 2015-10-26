@@ -1,39 +1,40 @@
 package net.diegolemos.bankapp.client;
 
 import net.diegolemos.bankapp.AbstractHttpTest;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import java.util.Collection;
 
-import static java.util.Arrays.asList;
 import static javax.ws.rs.client.Entity.json;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
-public class ClientResourceTest extends AbstractHttpTest {
+public class ClientResourceIT extends AbstractHttpTest {
 
     private static final Client BOB = aClient().withUsername("bob").build();
     private static final Client ALICE = aClient().withUsername("alice").build();
 
-    private ClientService clients = injectMock(ClientService.class);
-    private WebTarget clientResource = resource("client");
+    private WebTarget clientResource;
+
+    @Before
+    public void setUp() {
+        clientResource = resource("client");
+    }
 
     @Test public void
     should_save_client() {
         clientResource.path("bob").request().put(json(BOB));
 
-        verify(clients).save( BOB);
+        assertThat(clientResource.path("bob").request().get(new GenericType<Client>() {}), is(equalTo(BOB)));
     }
 
     @Test public void
-    should_get_client_by_username() {
-        given(clients.findByUsername("bob")).willReturn(BOB);
+    should_get_client_by_name() {
+        clientResource.path("bob").request().put(json(BOB));
 
         Client client = clientResource.path("bob").request().get(Client.class);
 
@@ -42,7 +43,8 @@ public class ClientResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_get_all_clients() {
-        given(clients.all()).willReturn(asList(ALICE, BOB));
+        clientResource.path("alice").request().put(json(ALICE));
+        clientResource.path("bob").request().put(json(BOB));
 
         Collection<Client> clients = clientResource.request().get(new GenericType<Collection<Client>>() {});
 

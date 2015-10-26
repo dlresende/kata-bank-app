@@ -2,34 +2,38 @@ package net.diegolemos.bankapp.account;
 
 import net.diegolemos.bankapp.AbstractHttpTest;
 import net.diegolemos.bankapp.client.Client;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import java.util.Collection;
 
-import static java.util.Arrays.asList;
 import static javax.ws.rs.client.Entity.json;
 import static net.diegolemos.bankapp.client.ClientBuilder.aClient;
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
-public class AccountResourceTest extends AbstractHttpTest {
+public class AccountResourceIT extends AbstractHttpTest {
 
     private static final Client ALICE = aClient().withUsername("alice").build();
     private static final Client BOB = aClient().withUsername("bob").build();
     private static final Account ALICE_ACCOUNT = new Account(ALICE);
     private static final Account BOB_ACCOUNT = new Account(BOB);
 
-    private AccountService accountService = injectMock(AccountService.class);
-    private WebTarget accountResource = resource("account");
+    private WebTarget clientResource;
+    private WebTarget accountResource;
+
+    @Before
+    public void setUp() {
+        clientResource = resource("client");
+        accountResource = resource("account");
+        clientResource.path("bob").request().put(json(BOB));
+    }
 
     @Test public void
-    should_get_account_balance_for_a_given_client() {
-        given(accountService.findBy("bob")).willReturn(BOB_ACCOUNT);
+    should_get_account_of_a_specific_client() {
+        accountResource.request().put(json(BOB_ACCOUNT));
 
         Account bobAccount = accountResource.path("bob").request().get(Account.class);
 
@@ -40,12 +44,14 @@ public class AccountResourceTest extends AbstractHttpTest {
     should_create_a_new_account_for_a_given_client() {
         accountResource.request().put(json(BOB_ACCOUNT));
 
-        verify(accountService).save(BOB_ACCOUNT);
+        assertThat(accountResource.path("bob").request().get(Account.class), is(equalTo(BOB_ACCOUNT)));
     }
 
     @Test public void
     should_get_all_accounts() {
-        given(accountService.all()).willReturn(asList(BOB_ACCOUNT, ALICE_ACCOUNT));
+        accountResource.request().put(json(BOB_ACCOUNT));
+        clientResource.path("alice").request().put(json(ALICE));
+        accountResource.request().put(json(ALICE_ACCOUNT));
 
         Collection<Account> accounts = accountResource.request().get(new GenericType<Collection<Account>>() {});
 
@@ -54,11 +60,12 @@ public class AccountResourceTest extends AbstractHttpTest {
 
     @Test public void
     should_update_account() {
-        Account account = new Account(ALICE);
-        account.deposit(10);
+        accountResource.request().put(json(BOB_ACCOUNT)).readEntity(Account.class);
+        Account bobAccount = accountResource.path("bob").request().get(Account.class);
+        bobAccount.deposit(10);
 
-        accountResource.request().put(json(account));
+        accountResource.request().put(json(bobAccount));
 
-        verify(accountService).save(account);
+        assertThat(accountResource.path("bob").request().get(Account.class).balance(), is(10D));
     }
 }
