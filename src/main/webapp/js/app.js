@@ -16,6 +16,6 @@ angular.module('bankApp', ['ngRoute'])
                 templateUrl:'partials/accounts.html'
             })
             .otherwise({
-                redirectTo:'/'
+                redirectTo:'/clients'
             });
     });
