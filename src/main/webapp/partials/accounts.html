@@ -20,17 +20,47 @@
 
     <div class="panel panel-default" ng-show="account">
         <div class="panel-heading">{{account.client.username}}</div>
-        <table class="table">
+        <table class="table table-hover table-condensed table-no-border">
             <thead>
             <tr>
-                <th>Balance</th>
+                <th class="col-md-5">Amount</th>
+                <th class="col-md-6">Type</th>
+                <th class="col-md-1"></th>
             </tr>
             </thead>
+            <tbody>
+            <tr ng-repeat="transaction in transactions">
+                <td>
+                    <input name="amount" type="number" class="form-control" ng-model="transaction.amount">
+                </td>
+                <td>
+                    <select name="type" ng-model="transaction.type" class="form-control">
+                        <option>DEPOSIT</option>
+                    </select>
+                </td>
+                <td class="col-md-1">
+                    <button type="button" class="btn btn-default btn-sm pull-right" ng-click="newTransaction()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
             <tfoot>
             <tr>
+                <td>Balance</td>
                 <td>{{account.balance}} EUR</td>
+                <td></td>
             </tr>
             </tfoot>
         </table>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button type="button" ng-click="updateAccount()" class="btn btn-default">Save</button>
+            </div>
+        </div>
+    </div>
+
 </div>

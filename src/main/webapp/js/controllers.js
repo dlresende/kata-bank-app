@@ -25,6 +25,8 @@ angular.module('bankApp')
         };
     })
     .controller('AccountsCtrl', function($scope, $http, $routeParams) {
+        $scope.transactions = [{amount: undefined, type: undefined}];
+
         $scope.getAccountBy = function(username) {
             $http.get('/api/account/' + username)
                 .success(function(account) {
@@ -32,7 +34,23 @@ angular.module('bankApp')
                 });
         };
 
+        $scope.updateAccount = function() {
+            $scope.account.transactions.transactions = $scope.transactions;
+
+            $http.put('/api/account/', $scope.account).success(function() {
+                $scope.getAccountBy($routeParams.username);
+            });
+        };
+
         if($routeParams.username) {
             $scope.getAccountBy($routeParams.username);
         }
+
+        $scope.newTransaction = function() {
+            $scope.addTransaction({amount: 0, type: 'DEPOSIT'});
+        };
+
+        $scope.addTransaction = function(transaction) {
+            $scope.transactions.push(transaction);
+        };
     });

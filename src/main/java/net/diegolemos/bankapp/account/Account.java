@@ -8,6 +8,7 @@ import net.diegolemos.bankapp.transaction.Transactions;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Account {
+
     @JsonProperty
     private Client client;
 

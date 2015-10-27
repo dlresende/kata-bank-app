@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Transactions {
+
     @JsonProperty
     private List<Transaction> transactions = new LinkedList<>();
 
