@@ -19,7 +19,8 @@ The goal of this kata is to write new executable specifications for our bank app
 
 3.By doing TDD, implement the 'withdraw' feature just added before, starting from front (html) and going deeper as you code. By the end, users could be able to withdraw from user interface. Decide when to use any of all existing test types (e2e, integration and unit tests).
 
-### Step 2: Add a scenario in the previous added feature for the case when a withdrawal generates an overdraft (clients that have balance 0.0 and withdrawals must have balance 0.0 after the operation).
+### Step 2: Cover boarder cases for last feature
+Add a scenario in the previous added feature for the case when a withdrawal generates an overdraft (clients that have balance 0.0 and withdrawals must have balance 0.0 after the operation).
 
 ### Step 3: Update the existing feature deposit
 Currently, users can add a negative deposit, which does not make sens. Add a new scenario to fix this issue. Does this need to be fixed in the front end, in the bacn end or both?
