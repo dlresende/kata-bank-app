@@ -15,7 +15,7 @@ The goal of this kata is to write new executable specifications for our bank app
        When he withdraws 10.0 EUR from his account
        Then the new balance is 90.0 EUR
 ```
-2.Implement the missing steps described in the previous scenario in the class `net.diegolemos.bankapp.steps.AccountStepdefs`.
+2.Implement the missing steps described in the previous scenario in the class `net.diegolemos.bankapp.steps.account.AccountStepdefs`.
 
 3.By doing TDD, implement the 'withdraw' feature just added before, starting from front (html) and going deeper as you code. By the end, users could be able to withdraw from user interface. Decide when to use any of all existing test types (e2e, integration and unit tests).
 

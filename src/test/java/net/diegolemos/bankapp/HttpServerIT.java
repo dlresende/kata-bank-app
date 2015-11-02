@@ -8,7 +8,6 @@ import org.junit.Before;
 import javax.ws.rs.client.WebTarget;
 
 import static javax.ws.rs.client.ClientBuilder.newClient;
-import static net.diegolemos.bankapp.MyServer.BANK_APP;
 
 public abstract class HttpServerIT {
 
@@ -16,7 +15,7 @@ public abstract class HttpServerIT {
 
     @Before
     public void startServer() throws Exception {
-        server = MyServer.startServer(new BankAppBinder());
+        server = MyServer.startServer(new BankAppBinder(), "8081");
     }
 
     @After
@@ -27,6 +26,6 @@ public abstract class HttpServerIT {
     protected WebTarget resource(String path) {
         javax.ws.rs.client.Client client = newClient();
         client.register(JacksonFeature.class);
-        return client.target(BANK_APP).path(path);
+        return client.target("http://localhost:8081/api/").path(path);
     }
 }

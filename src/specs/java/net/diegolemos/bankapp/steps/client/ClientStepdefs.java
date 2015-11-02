@@ -1,4 +1,4 @@
-package net.diegolemos.bankapp.steps;
+package net.diegolemos.bankapp.steps.client;
 
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -20,14 +20,13 @@ public class ClientStepdefs {
 
     private ClientRepository clients;
     private ClientService clientService;
+    private Client client;
 
     @Before
     public void setUp() {
         clients = mock(ClientRepository.class);
         clientService = new ClientService(clients);
     }
-
-    private Client client;
 
     @Given("^\"([^\"]*)\" born on \"([^\"]*)\"$")
     public void born_on(String username, Date birthday) throws Throwable {
