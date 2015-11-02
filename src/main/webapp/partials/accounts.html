@@ -9,7 +9,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="input-username" ng-model="username">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
+                        <button class="btn btn-default" name="searchUserBtn" type="submit">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -20,7 +20,7 @@
 
     <div class="panel panel-default" ng-show="account">
         <div class="panel-heading">{{account.client.username}}</div>
-        <table class="table table-hover table-condensed table-no-border">
+        <table class="table table-hover table-condensed table-no-border" name="transactions">
             <thead>
             <tr>
                 <th class="col-md-5">Amount</th>
@@ -39,7 +39,7 @@
                     </select>
                 </td>
                 <td class="col-md-1">
-                    <button type="button" class="btn btn-default btn-sm pull-right" ng-click="newTransaction()">
+                    <button type="button" name="addTransactionBtn" class="btn btn-default btn-sm pull-right" ng-click="newTransaction()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </td>
@@ -58,7 +58,7 @@
     <div class="form-group">
         <div class="col-md-12">
             <div class="pull-right">
-                <button type="button" ng-click="updateAccount()" class="btn btn-default">Save</button>
+                <button type="button" name="saveNewTransactionBtn" ng-click="updateAccount()" class="btn btn-default">Save</button>
             </div>
         </div>
     </div>
