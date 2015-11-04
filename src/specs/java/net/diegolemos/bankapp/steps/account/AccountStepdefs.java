@@ -66,7 +66,7 @@ public class AccountStepdefs {
         }
     }
 
-    @After("@id")
+    @After("@ui")
     public void tearDownUI() {
         webDriver.quit();
         server.shutdown();
