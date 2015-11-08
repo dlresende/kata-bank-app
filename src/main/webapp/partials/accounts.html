@@ -1,19 +1,13 @@
 <div class="col-md-6">
     <form class="form-horizontal" role="form" ng-submit="getAccountBy(username)">
         <div class="form-group">
-            <div class="col-md-2">
-                <label for="input-username" class="pull-right control-label">Username</label>
-            </div>
-
-            <div class="col-md-10">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="input-username" ng-model="username">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" name="searchUserBtn" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
+            <div class="input-group">
+                <input type="text" class="form-control" id="input-username" ng-model="username" placeholder="Enter the client name">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" name="searchUserBtn" type="submit" >
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
             </div>
         </div>
     </form>
@@ -25,11 +19,10 @@
             <tr>
                 <th class="col-md-5">Amount</th>
                 <th class="col-md-6">Type</th>
-                <th class="col-md-1"></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="transaction in transactions">
+            <tr ng-repeat="transaction in account.transactions.transactions">
                 <td>
                     <input name="amount" type="number" class="form-control" ng-model="transaction.amount">
                 </td>
@@ -38,18 +31,18 @@
                         <option>DEPOSIT</option>
                     </select>
                 </td>
-                <td class="col-md-1">
-                    <button type="button" name="addTransactionBtn" class="btn btn-default btn-sm pull-right" ng-click="newTransaction()">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
+            </tr>
+            <tr>
+                <td>
+                    <a ng-click="newTransaction()" name="addTransactionBtn">Add transaction</a>
                 </td>
+                <td></td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                 <td>Balance</td>
                 <td>{{account.balance}} EUR</td>
-                <td></td>
             </tr>
             </tfoot>
         </table>
@@ -58,9 +51,8 @@
     <div class="form-group">
         <div class="col-md-12">
             <div class="pull-right">
-                <button type="button" name="saveNewTransactionBtn" ng-click="updateAccount()" class="btn btn-default">Save</button>
+                <button type="button" name="saveNewTransactionBtn" ng-click="updateAccount()" ng-disabled="!!!account.client.username" class="btn btn-default">Save</button>
             </div>
         </div>
     </div>
-
 </div>

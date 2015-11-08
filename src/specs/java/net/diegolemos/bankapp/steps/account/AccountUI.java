@@ -45,9 +45,9 @@ public class AccountUI implements Account {
         // rechercher le compte
         webDriver.findElement(By.id("input-username")).sendKeys(username);
         webDriver.findElement(By.name("searchUserBtn")).click();
-        (new WebDriverWait(webDriver, 5)).until((Predicate<WebDriver>) driver -> driver.findElement(By.name("addTransactionBtn")) != null);
 
         // déposer de l'argent
+        webDriver.findElement(By.name("addTransactionBtn")).click();
         WebElement baseTable = webDriver.findElement(By.name("transactions"));
         WebElement lines = baseTable.findElement(By.tagName("tbody"));
         WebElement firstLine = lines.findElements(By.tagName("tr")).get(0);
